@@ -54,9 +54,7 @@
         "pipelines_source_key_unique": {
           "name": "pipelines_source_key_unique",
           "nullsNotDistinct": false,
-          "columns": [
-            "source_key"
-          ]
+          "columns": ["source_key"]
         }
       },
       "policies": {},

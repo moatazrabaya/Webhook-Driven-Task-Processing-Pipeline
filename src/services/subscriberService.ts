@@ -2,7 +2,10 @@ import { createSubscriber } from "../db/queries/subscribers.js";
 import { BadRequestError } from "../api/errors.js";
 import { isValidUrl } from "../utils/isValidUrl.js";
 
-export async function createSubscribers(pipelineId: string, subscribers: string[]) {
+export async function createSubscribers(
+  pipelineId: string,
+  subscribers: string[],
+) {
   for (const sub of subscribers) {
     if (!isValidUrl(sub)) throw new BadRequestError("Invalid subscriber URL");
 

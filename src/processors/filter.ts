@@ -2,13 +2,12 @@ export type FilterConfig = {
   field: string;
   operator: ">" | "<" | "=" | ">=" | "<=";
   value: number;
-}
+};
 
 export function filterProcessor(
   payload: Record<string, unknown>,
-  config: FilterConfig
-){
-
+  config: FilterConfig,
+) {
   const fieldValue = payload[config.field];
 
   // “Falsy ≠ missing” --> Missing means:undefined OR null --> Everything else is valid data.
@@ -26,7 +25,7 @@ export function filterProcessor(
 
   switch (config.operator) {
     case ">":
-      filter = numericValue > config.value
+      filter = numericValue > config.value;
       break;
 
     case "<":
@@ -34,7 +33,7 @@ export function filterProcessor(
       break;
 
     case "=":
-      filter =  numericValue === config.value;
+      filter = numericValue === config.value;
       break;
 
     case ">=":
@@ -49,10 +48,10 @@ export function filterProcessor(
       filter = false;
   }
 
-  return (filter === true)?payload:null;
+  return filter === true ? payload : null;
 }
 
-export function validateFilterConfig(config: any){
+export function validateFilterConfig(config: any) {
   return (
     !!config &&
     typeof config.field === "string" &&

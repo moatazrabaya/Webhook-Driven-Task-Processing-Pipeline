@@ -1,4 +1,3 @@
-
 import type { Response } from "express";
 
 export function respondWithError(res: Response, code: number, message: string) {
