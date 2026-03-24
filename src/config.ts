@@ -14,8 +14,6 @@ type DBConfig = {
   migrationConfig: MigrationConfig;
 };
 
-process.loadEnvFile();
-
 function envOrThrow(key: string) {
   // eslint-disable-next-line security/detect-object-injection
   const value = process.env[key];
@@ -35,6 +33,6 @@ export const config: Config = {
   },
   db: {
     url: envOrThrow("DB_URL"),
-    migrationConfig: migrationConfig,
+    migrationConfig,
   },
 };
