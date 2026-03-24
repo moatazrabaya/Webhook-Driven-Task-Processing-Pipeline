@@ -1,5 +1,6 @@
 import express from "express";
 import {
+  handlerPipelineDelete,
   handlerPipelineGet,
   handlerPipelinesCreate,
   handlerPipelinesRetrieve,
@@ -22,6 +23,10 @@ router.get("/:pipelineId", (req, res, next) => {
 
 router.put("/:pipelineId", (req, res, next) => {
   Promise.resolve(handlerPipelineUpdate(req, res)).catch(next);
+});
+
+router.delete("/:pipelineId", (req, res, next) => {
+  Promise.resolve(handlerPipelineDelete(req, res)).catch(next);
 });
 
 export default router;

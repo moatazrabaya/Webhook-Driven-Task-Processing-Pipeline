@@ -7,6 +7,7 @@ import { generateSourceKey } from "../utils/generateSourceKey.js";
 import { isActionType } from "../utils/checkActionType.js";
 import {
   createPipelineWithSubscribers,
+  deletePipeline,
   getPipeline,
   getPipelines,
   updatePipeline,
@@ -108,4 +109,15 @@ export async function handlerPipelineUpdate(req: Request, res: Response) {
   const updated = await updatePipeline(pipelineId, updateData);
 
   respondWithJSON(res, 200, updated);
+}
+
+export async function handlerPipelineDelete(req: Request, res: Response) {
+  const { pipelineId } = req.params;
+  if (typeof pipelineId !== "string" || pipelineId.trim() === "") {
+    throw new BadRequestError("Invalid pipeline ID");
+  }
+
+  await deletePipeline(pipelineId);
+
+  res.status(204).send();
 }

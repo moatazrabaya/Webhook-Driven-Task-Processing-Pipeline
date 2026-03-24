@@ -1,6 +1,7 @@
 import { NewPipeline } from "../db/schema.js";
 import {
   createPipeline,
+  deletePipelineById,
   getAllPipelines,
   getPipelineById,
   updatePipelineById,
@@ -64,4 +65,11 @@ export async function updatePipeline(
     throw new NotFoundError("Pipeline not found");
   }
   return updated;
+}
+
+export async function deletePipeline(pipelineId: string) {
+  const deleted = await deletePipelineById(pipelineId);
+  if (!deleted) {
+    throw new Error(`Failed to delete pipeline with pipelineId: ${pipelineId}`);
+  }
 }

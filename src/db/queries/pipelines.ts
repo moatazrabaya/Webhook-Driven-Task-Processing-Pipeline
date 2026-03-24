@@ -46,3 +46,11 @@ export async function updatePipelineById(
 
   return result;
 }
+
+export async function deletePipelineById(id: string): Promise<boolean> {
+  const rows = await db
+    .delete(pipelines)
+    .where(eq(pipelines.id, id))
+    .returning();
+  return rows.length > 0;
+}
