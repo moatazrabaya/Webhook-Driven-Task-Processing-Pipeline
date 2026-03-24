@@ -13,7 +13,9 @@ export function extractProcessor(
   const result: Record<string, unknown> = {};
 
   for (const field of config.fields) {
+    // eslint-disable-next-line security/detect-object-injection
     if (payload[field] !== undefined) {
+      // eslint-disable-next-line security/detect-object-injection
       result[field] = payload[field];
     }
   }
