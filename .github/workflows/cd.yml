@@ -34,6 +34,15 @@ jobs:
       - name: Start containers
         run: docker compose up -d --build
 
+      - name: Wait for API
+        run: sleep 10
+
+      - name: Check API response
+        run: curl http://localhost:8080/pipelines
+
+      - name: Show built images
+        run: docker images
+
       - name: Show running containers
         run: docker ps
 
