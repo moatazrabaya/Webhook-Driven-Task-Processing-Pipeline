@@ -83,7 +83,7 @@ async function tryFetch(job: JobDeliveryData, subscriber: Subscriber) {
       }),
     });
     return response;
-  } catch{
+  } catch {
     return null;
   }
 }
