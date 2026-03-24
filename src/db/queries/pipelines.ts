@@ -33,3 +33,16 @@ export async function getPipelineById(
     .where(eq(pipelines.id, id));
   return result;
 }
+
+export async function updatePipelineById(
+  id: string,
+  data: Partial<NewPipeline>,
+): Promise<Pipeline | undefined> {
+  const [result] = await db
+    .update(pipelines)
+    .set(data)
+    .where(eq(pipelines.id, id))
+    .returning();
+
+  return result;
+}

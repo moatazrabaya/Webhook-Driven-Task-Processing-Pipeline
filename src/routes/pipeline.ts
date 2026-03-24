@@ -3,6 +3,7 @@ import {
   handlerPipelineGet,
   handlerPipelinesCreate,
   handlerPipelinesRetrieve,
+  handlerPipelineUpdate,
 } from "../handlers/pipeline.js";
 
 const router = express.Router();
@@ -17,6 +18,10 @@ router.get("/", (req, res, next) => {
 
 router.get("/:pipelineId", (req, res, next) => {
   Promise.resolve(handlerPipelineGet(req, res)).catch(next);
+});
+
+router.put("/:pipelineId", (req, res, next) => {
+  Promise.resolve(handlerPipelineUpdate(req, res)).catch(next);
 });
 
 export default router;

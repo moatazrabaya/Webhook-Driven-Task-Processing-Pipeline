@@ -9,7 +9,9 @@ import {
   createPipelineWithSubscribers,
   getPipeline,
   getPipelines,
+  updatePipeline,
 } from "../services/pipelineService.js";
+import type { UpdatePipeline } from "../services/pipelineService.js";
 
 export async function handlerPipelinesCreate(req: Request, res: Response) {
   type parameters = {
@@ -69,4 +71,41 @@ export async function handlerPipelineGet(req: Request, res: Response) {
   const pipeline = await getPipeline(pipelineId);
 
   respondWithJSON(res, 200, pipeline);
+}
+
+export async function handlerPipelineUpdate(req: Request, res: Response) {
+  const { pipelineId } = req.params;
+
+  if (typeof pipelineId !== "string" || pipelineId.trim() === "") {
+    throw new BadRequestError("Invalid pipeline ID");
+  }
+
+  type parameters = {
+    name?: string;
+    action_type?: string;
+    config?: Record<string, any>;
+  };
+
+  const params: parameters = req.body;
+
+  const updateData: UpdatePipeline = {};
+
+  if (params.name) {
+    updateData.name = params.name;
+  }
+
+  if (params.action_type) {
+    if (!isActionType(params.action_type)) {
+      throw new BadRequestError("Invalid action type");
+    }
+    updateData.actionType = params.action_type;
+  }
+
+  if (params.config) {
+    updateData.config = params.config;
+  }
+
+  const updated = await updatePipeline(pipelineId, updateData);
+
+  respondWithJSON(res, 200, updated);
 }

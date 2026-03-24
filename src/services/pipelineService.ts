@@ -3,9 +3,17 @@ import {
   createPipeline,
   getAllPipelines,
   getPipelineById,
+  updatePipelineById,
 } from "../db/queries/pipelines.js";
 import { BadRequestError, NotFoundError } from "../api/errors.js";
 import { createSubscribers } from "../services/subscriberService.js";
+import { ActionType } from "../enums/actionType.js";
+
+export type UpdatePipeline = {
+  name?: string;
+  actionType?: ActionType;
+  config?: Record<string, unknown>;
+};
 
 export async function createPipelineWithSubscribers(
   pipeline: NewPipeline,
@@ -45,4 +53,15 @@ export async function getPipeline(pipelineId: string) {
     throw new NotFoundError("Pipeline not found");
   }
   return pipeline;
+}
+
+export async function updatePipeline(
+  pipelineId: string,
+  updateData: UpdatePipeline,
+) {
+  const updated = await updatePipelineById(pipelineId, updateData);
+  if (!updated) {
+    throw new NotFoundError("Pipeline not found");
+  }
+  return updated;
 }
