@@ -5,6 +5,8 @@ import { drizzle } from "drizzle-orm/postgres-js";
 
 import pipelineRoutes from "./routes/pipeline.js";
 import webhookRoutes from "./routes/webhooks.js";
+import jobRoutes from "./routes/jobs.js";
+
 import { errorMiddleWare } from "./api/middleware.js";
 import { config } from "./config.js";
 
@@ -17,6 +19,7 @@ app.use(express.json());
 
 app.use("/pipelines", pipelineRoutes);
 app.use("/webhooks", webhookRoutes);
+app.use("/jobs", jobRoutes);
 
 app.use(errorMiddleWare);
 

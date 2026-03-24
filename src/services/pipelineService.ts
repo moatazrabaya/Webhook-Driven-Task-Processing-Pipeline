@@ -1,5 +1,5 @@
 import { NewPipeline } from "../db/schema.js";
-import { createPipeline } from "../db/queries/pipeline.js";
+import { createPipeline } from "../db/queries/pipelines.js";
 import { BadRequestError } from "../api/errors.js";
 import { createSubscribers } from "../services/subscriberService.js";
 

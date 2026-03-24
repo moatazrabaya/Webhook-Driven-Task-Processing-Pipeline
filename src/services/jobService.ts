@@ -1,6 +1,6 @@
 import { BadRequestError, NotFoundError } from "../api/errors.js";
-import { createJob } from "../db/queries/jobs.js";
-import { getPipelineByKey } from "../db/queries/pipeline.js";
+import { createJob, getJobById } from "../db/queries/jobs.js";
+import { getPipelineByKey } from "../db/queries/pipelines.js";
 
 export async function createJobFromWebhook(
   sourceKey: string,
@@ -31,4 +31,12 @@ export async function createJobFromWebhook(
 
     throw new Error("Database error");
   }
+}
+
+export async function getJob(jobId: string) {
+  const job = await getJobById(jobId);
+  if (!job) {
+    throw new NotFoundError("Job not found");
+  }
+  return job;
 }
