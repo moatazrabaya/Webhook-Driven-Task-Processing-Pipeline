@@ -1,4 +1,4 @@
-import { getJobDeliveryAttempts } from "src/db/queries/deliveryAttempts.js";
+import { getJobDeliveryAttempts } from "../db/queries/deliveryAttempts.js";
 import { BadRequestError, NotFoundError } from "../api/errors.js";
 import { createJob, getJobById, getJobs } from "../db/queries/jobs.js";
 import { getPipelineByKey } from "../db/queries/pipelines.js";
