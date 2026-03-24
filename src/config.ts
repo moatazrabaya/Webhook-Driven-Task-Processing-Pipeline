@@ -13,6 +13,7 @@ type DBConfig = {
   url: string;
   migrationConfig: MigrationConfig;
 };
+process.loadEnvFile();
 
 function envOrThrow(key: string) {
   // eslint-disable-next-line security/detect-object-injection
