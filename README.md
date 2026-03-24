@@ -61,6 +61,17 @@ src/
 
 ---
 
+## 🔄 System Workflow
+
+1. Create pipeline → POST /pipelines  
+2. Send webhook → POST /webhooks/:sourceKey  
+3. Job created (pending)  
+4. Worker processes job  
+5. Job completed  
+6. Result delivered to subscribers  
+
+---
+
 ## 📡 API Endpoints
 
 ### Create Pipeline
@@ -228,7 +239,7 @@ docker compose up --build
 
 ### Services
 
-* API → `http://localhost:3000`
+* API → `http://localhost:8080`
 * PostgreSQL → port `5432`
 * Worker → background processing
 
