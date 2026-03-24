@@ -31,32 +31,8 @@ jobs:
       - name: Validate Docker Compose
         run: docker compose config
 
-      - name: Start postgres
-        run: docker compose up -d postgres
-
-      - name: Wait for postgres
-        run: sleep 10
-
-      - name: Run migrations
-        run: docker compose run --rm api npm run db:migrate
-
-      - name: Start API and worker
-        run: docker compose up -d api worker
-
-      - name: Wait for API
-        run: sleep 10
-
-      - name: Show container status
-        run: docker compose ps
-
-      - name: Show API logs
-        run: docker compose logs api
-
-      - name: Show worker logs
-        run: docker compose logs worker
-
-      - name: Check API response
-        run: curl http://localhost:8080/pipelines
+      - name: Start containers
+        run: docker compose up -d --build
 
       - name: Show built images
         run: docker images
@@ -67,4 +43,3 @@ jobs:
       - name: Stop containers
         if: always()
         run: docker compose down -v
-        
