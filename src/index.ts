@@ -3,7 +3,7 @@ import postgres from "postgres";
 import { migrate } from "drizzle-orm/postgres-js/migrator";
 import { drizzle } from "drizzle-orm/postgres-js";
 
-import pipelineRoutes from "./routes/pipeline.js";
+import pipelineRoutes from "./routes/pipelines.js";
 import webhookRoutes from "./routes/webhooks.js";
 import jobRoutes from "./routes/jobs.js";
 
