@@ -7,6 +7,7 @@ import { generateSourceKey } from "../utils/generateSourceKey.js";
 import { isActionType } from "../utils/checkActionType.js";
 import {
   createPipelineWithSubscribers,
+  getPipeline,
   getPipelines,
 } from "../services/pipelineService.js";
 
@@ -58,4 +59,14 @@ export async function handlerPipelinesCreate(req: Request, res: Response) {
 export async function handlerPipelinesRetrieve(req: Request, res: Response) {
   const pipelines = await getPipelines();
   respondWithJSON(res, 200, pipelines);
+}
+
+export async function handlerPipelineGet(req: Request, res: Response) {
+  const { pipelineId } = req.params;
+  if (typeof pipelineId !== "string" || pipelineId.trim() === "") {
+    throw new BadRequestError("Invalid pipeline ID");
+  }
+  const pipeline = await getPipeline(pipelineId);
+
+  respondWithJSON(res, 200, pipeline);
 }

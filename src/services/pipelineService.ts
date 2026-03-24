@@ -1,6 +1,10 @@
 import { NewPipeline } from "../db/schema.js";
-import { createPipeline, getAllPipelines } from "../db/queries/pipelines.js";
-import { BadRequestError } from "../api/errors.js";
+import {
+  createPipeline,
+  getAllPipelines,
+  getPipelineById,
+} from "../db/queries/pipelines.js";
+import { BadRequestError, NotFoundError } from "../api/errors.js";
 import { createSubscribers } from "../services/subscriberService.js";
 
 export async function createPipelineWithSubscribers(
@@ -32,4 +36,13 @@ export async function getPipelines() {
     console.log("No pipelines found in the database.");
   }
   return pipelines;
+}
+
+export async function getPipeline(pipelineId: string) {
+  const pipeline = await getPipelineById(pipelineId);
+
+  if (!pipeline) {
+    throw new NotFoundError("Pipeline not found");
+  }
+  return pipeline;
 }
