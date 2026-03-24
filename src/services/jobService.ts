@@ -30,7 +30,7 @@ export async function createJobFromWebhook(
       throw new BadRequestError("Duplicate job");
     }
 
-    throw new Error("Database error");
+    throw new Error("Database error", { cause: err });
   }
 }
 

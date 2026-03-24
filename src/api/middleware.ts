@@ -9,9 +9,10 @@ import {
 
 export function errorMiddleWare(
   err: Error,
-  _: Request,
+  _req: Request,
   res: Response,
-  __: NextFunction,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  _next: NextFunction,
 ) {
   let statusCode = 500;
   let message = "Something went wrong on our end";

@@ -22,7 +22,7 @@ export async function createSubscribers(
         throw new BadRequestError("Duplicate subscriber");
       }
 
-      throw new Error("Database error");
+      throw new Error("Database error", { cause: err });
     }
   }
 }
