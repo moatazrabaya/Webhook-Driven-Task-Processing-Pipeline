@@ -14,3 +14,8 @@ export async function getJobById(id: string): Promise<Job | undefined> {
   const [result] = await db.select().from(jobs).where(eq(jobs.id, id));
   return result;
 }
+
+export async function getJobs(): Promise<Job[]> {
+  const result = await db.select().from(jobs);
+  return result;
+}

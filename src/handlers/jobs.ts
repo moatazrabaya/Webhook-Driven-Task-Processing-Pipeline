@@ -2,7 +2,7 @@ import type { Request, Response } from "express";
 
 import { BadRequestError } from "../api/errors.js";
 import { respondWithJSON } from "../api/json.js";
-import { getJob } from "../services/jobService.js";
+import { getAllJobs, getJob } from "../services/jobService.js";
 
 export async function handlerJobGet(req: Request, res: Response){
     const { jobId } = req.params;
@@ -11,4 +11,9 @@ export async function handlerJobGet(req: Request, res: Response){
     }
     const job = await getJob(jobId);
     respondWithJSON(res, 200, job);
+}
+
+export async function handlerJobsRetrieve(req: Request, res: Response){
+    const jobs = await getAllJobs();
+    respondWithJSON(res, 200, jobs);
 }
