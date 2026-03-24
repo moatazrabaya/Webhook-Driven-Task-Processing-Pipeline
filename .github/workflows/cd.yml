@@ -1,0 +1,46 @@
+name: cd
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  package:
+    name: Build Dockerized App
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: '.nvmrc'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build app
+        run: npm run build
+
+      - name: Build Docker image
+        run: docker build -t webhook-pipeline .
+
+      - name: Validate Docker Compose
+        run: docker compose config
+
+      - name: Start containers
+        run: docker compose up -d --build
+
+      - name: Show built images
+        run: docker images
+
+      - name: Show running containers
+        run: docker ps
+
+      - name: Stop containers
+        if: always()
+        run: docker compose down -v
+		
