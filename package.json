@@ -10,17 +10,27 @@
     "dev": "npx tsc && node dist/index.js",
     "generate": "drizzle-kit generate",
     "migrate": "drizzle-kit migrate",
-    "test": "vitest --run"
+    "test": "vitest --run",
+    "format:write": "prettier --write \"src/**/*.{js,ts,json,css,md}\"",
+    "format:check": "prettier --check \"src/**/*.{js,ts,json,css,md}\"",
+    "lint": "eslint ."
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@types/eslint-plugin-security": "^3.0.1",
     "@types/express": "^5.0.6",
     "@types/node": "^25.5.0",
     "@vitest/coverage-v8": "^4.1.1",
     "drizzle-kit": "^0.31.10",
-    "typescript": "^6.0.2",
+    "eslint": "^10.1.0",
+    "eslint-plugin-security": "^4.0.0",
+    "globals": "^17.4.0",
+    "prettier": "3.8.1",
+    "typescript": "^5.7.3",
+    "typescript-eslint": "^8.57.2",
     "vitest": "^4.1.1"
   },
   "dependencies": {

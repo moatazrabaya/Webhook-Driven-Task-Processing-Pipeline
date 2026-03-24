@@ -64,7 +64,7 @@ async function retryDelivery(job: JobDeliveryData, subscriber: Subscriber) {
         throw new BadRequestError("Duplicate delivery attempt");
       }
 
-      throw new Error("Database error");
+      throw new Error("Database error", { cause: err });
     }
   }
 
@@ -83,7 +83,7 @@ async function tryFetch(job: JobDeliveryData, subscriber: Subscriber) {
       }),
     });
     return response;
-  } catch (error) {
+  } catch {
     return null;
   }
 }

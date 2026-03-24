@@ -1,4 +1,4 @@
-export enum DeliveryStatus{
+export enum DeliveryStatus {
   SUCCESS = "success",
   FAILED = "failed",
-};
+}
