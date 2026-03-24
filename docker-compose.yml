@@ -1,0 +1,38 @@
+version: "3.9"
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: task_pipeline_postgres
+    environment:
+      POSTGRES_DB: task_pipeline_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  api:
+    build: .
+    container_name: task_pipeline_api
+    depends_on:
+      - postgres
+    environment:
+      PORT: 8080
+      DB_URL: postgres://postgres:postgres@postgres:5432/task_pipeline_db?sslmode=disable
+    ports:
+      - "8080:8080"
+    command: npm run start
+
+  worker:
+    build: .
+    container_name: task_pipeline_worker
+    depends_on:
+      - postgres
+    environment:
+      DB_URL: postgres://postgres:postgres@postgres:5432/task_pipeline_db?sslmode=disable
+    command: npm run worker
+
+volumes:
+  postgres_data:
