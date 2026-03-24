@@ -24,7 +24,7 @@ app.use("/jobs", jobRoutes);
 app.post("/test-subscriber", (req, res) => {
   console.log("Received:", req.body);
 
-  res.json({ message: "Webhook received successfully" });
+  res.json({ message: "Webhook received successfully " });
 });
 
 app.use(errorMiddleWare);
