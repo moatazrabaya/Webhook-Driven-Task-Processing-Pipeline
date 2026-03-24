@@ -18,3 +18,8 @@ export async function getPipelineByKey(
     .where(eq(pipelines.sourceKey, key));
   return result;
 }
+
+export async function getAllPipelines(): Promise<Pipeline[]> {
+  const result = await db.select().from(pipelines);
+  return result;
+}

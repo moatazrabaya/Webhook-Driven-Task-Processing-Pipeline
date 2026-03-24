@@ -5,7 +5,10 @@ import { BadRequestError } from "../api/errors.js";
 import { respondWithJSON } from "../api/json.js";
 import { generateSourceKey } from "../utils/generateSourceKey.js";
 import { isActionType } from "../utils/checkActionType.js";
-import { createPipelineWithSubscribers } from "../services/pipelineService.js";
+import {
+  createPipelineWithSubscribers,
+  getPipelines,
+} from "../services/pipelineService.js";
 
 export async function handlerPipelinesCreate(req: Request, res: Response) {
   type parameters = {
@@ -32,12 +35,15 @@ export async function handlerPipelinesCreate(req: Request, res: Response) {
 
   const sourceKey = generateSourceKey();
 
-  const pipeline = await createPipelineWithSubscribers({
-    name: params.name,
-    sourceKey: sourceKey,
-    actionType: params.action_type,
-    config: params.config,
-  } satisfies NewPipeline, params.subscribers);
+  const pipeline = await createPipelineWithSubscribers(
+    {
+      name: params.name,
+      sourceKey: sourceKey,
+      actionType: params.action_type,
+      config: params.config,
+    } satisfies NewPipeline,
+    params.subscribers,
+  );
 
   respondWithJSON(res, 201, {
     id: pipeline.id,
@@ -47,4 +53,9 @@ export async function handlerPipelinesCreate(req: Request, res: Response) {
     config: pipeline.config ?? {},
     createdAt: pipeline.createdAt,
   } satisfies Pipeline);
+}
+
+export async function handlerPipelinesRetrieve(req: Request, res: Response) {
+  const pipelines = await getPipelines();
+  respondWithJSON(res, 200, pipelines);
 }

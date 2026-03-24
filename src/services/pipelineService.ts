@@ -1,5 +1,5 @@
 import { NewPipeline } from "../db/schema.js";
-import { createPipeline } from "../db/queries/pipelines.js";
+import { createPipeline, getAllPipelines } from "../db/queries/pipelines.js";
 import { BadRequestError } from "../api/errors.js";
 import { createSubscribers } from "../services/subscriberService.js";
 
@@ -24,4 +24,12 @@ export async function createPipelineWithSubscribers(
     }
     throw err;
   }
+}
+
+export async function getPipelines() {
+  const pipelines = await getAllPipelines();
+  if (pipelines.length === 0) {
+    console.log("No pipelines found in the database.");
+  }
+  return pipelines;
 }
