@@ -21,6 +21,12 @@ app.use("/pipelines", pipelineRoutes);
 app.use("/webhooks", webhookRoutes);
 app.use("/jobs", jobRoutes);
 
+app.post("/test-subscriber", (req, res) => {
+  console.log("Received:", req.body);
+
+  res.json({ message: "Webhook received successfully" });
+});
+
 app.use(errorMiddleWare);
 
 app.listen(config.api.port, () => {
