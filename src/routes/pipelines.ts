@@ -5,7 +5,7 @@ import {
   handlerPipelinesCreate,
   handlerPipelinesRetrieve,
   handlerPipelineUpdate,
-} from "../handlers/pipeline.js";
+} from "../handlers/pipelineHandler.js";
 
 const router = express.Router();
 
