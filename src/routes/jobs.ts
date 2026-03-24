@@ -3,7 +3,7 @@ import {
   handlerJobDeliveryAttempts,
   handlerJobGet,
   handlerJobsRetrieve,
-} from "../handlers/jobs.js";
+} from "../handlers/jobHandler.js";
 
 const router = express.Router();
 
