@@ -29,7 +29,7 @@ const migrationConfig: MigrationConfig = {
 
 export const config: Config = {
   api: {
-    port: Number(envOrThrow("PORT")),
+    port: Number(process.env.PORT || 8080),
   },
   db: {
     url: envOrThrow("DB_URL"),
