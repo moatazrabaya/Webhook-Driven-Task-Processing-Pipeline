@@ -8,6 +8,13 @@
       "when": 1774328582014,
       "tag": "0000_tearful_bushwacker",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1774329968645,
+      "tag": "0001_nifty_spitfire",
+      "breakpoints": true
     }
   ]
 }
