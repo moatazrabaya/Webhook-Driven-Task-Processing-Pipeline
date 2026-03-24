@@ -1,3 +1,4 @@
+import { getJobDeliveryAttempts } from "src/db/queries/deliveryAttempts.js";
 import { BadRequestError, NotFoundError } from "../api/errors.js";
 import { createJob, getJobById, getJobs } from "../db/queries/jobs.js";
 import { getPipelineByKey } from "../db/queries/pipelines.js";
@@ -47,4 +48,9 @@ export async function getAllJobs() {
     console.log("No jobs found in the database.");
   }
   return jobs;
+}
+
+export async function getAllJobDeliveryAttempts(jobId: string) {
+  const attempts = await getJobDeliveryAttempts(jobId);
+  return attempts;
 }
