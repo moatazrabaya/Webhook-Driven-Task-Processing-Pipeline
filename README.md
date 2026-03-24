@@ -1,5 +1,7 @@
 # 🚀 Webhook Processing System
 
+![code coverage badge](https://github.com/moatazrabaya/Webhook-Driven-Task-Processing-Pipeline/actions/workflows/ci.yml/badge.svg)
+
 A backend system that receives webhook events, processes them through configurable pipelines, and delivers results to subscribers.
 
 ---
