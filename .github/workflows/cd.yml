@@ -31,8 +31,17 @@ jobs:
       - name: Validate Docker Compose
         run: docker compose config
 
-      - name: Start containers
-        run: docker compose up -d --build
+      - name: Start postgres
+        run: docker compose up -d postgres
+
+      - name: Wait for postgres
+        run: sleep 10
+
+      - name: Run migrations
+        run: docker compose run --rm api npm run db:migrate
+
+      - name: Start API and worker
+        run: docker compose up -d api worker
 
       - name: Wait for API
         run: sleep 10
@@ -58,3 +67,4 @@ jobs:
       - name: Stop containers
         if: always()
         run: docker compose down -v
+        
