@@ -3,6 +3,7 @@ import postgres from "postgres";
 import { migrate } from "drizzle-orm/postgres-js/migrator";
 import { drizzle } from "drizzle-orm/postgres-js";
 
+import pipelineRoutes from "./routes/pipeline.js";
 import { errorMiddleWare } from "./api/middleware.js";
 import { config } from "./config.js";
 
@@ -13,7 +14,9 @@ const app = express();
 
 app.use(express.json());
 
+app.use("/pipelines", pipelineRoutes);
 app.use(errorMiddleWare);
+
 
 app.listen(config.api.port, () => {
   console.log(`Server is running at http://localhost:${config.api.port}`);
